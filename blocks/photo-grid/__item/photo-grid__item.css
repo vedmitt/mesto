@@ -1,0 +1,14 @@
+.photo-grid__item {
+    overflow-block: hidden;
+    width: 282px;
+    margin: 0 auto;
+    padding: 0;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 450px)  {
+    .photo-grid__item {
+        width: calc(100% - 38px);
+    }
+}

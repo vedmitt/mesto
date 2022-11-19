@@ -1,0 +1,18 @@
+.footer {
+    /*grid-area: footer;*/
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 68.75%;
+    margin: 66px auto 60px;
+    padding: 0;
+}
+
+
+@media screen and (max-width: 450px) {
+    .footer {
+        width: 100%;
+        margin: 48px 0 36px;
+    }
+}

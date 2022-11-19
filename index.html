@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+<body class="root">
+    <div class="page">
+        <header class="header">
+            <div class="header__logo"></div>
+        </header>
+    <main>
+        <section class="profile">
+                <div class="profile__info">
+                <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар пользователя">
+                    <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-btn" type="button"></button>
+                    <p class="profile__user-description">Исследователь океана</p>
+                </div>
+            <button class="profile__add-btn" type="button"></button>
+        </section>
+        <div class="photo-grid">
+            <article class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-grid-moon.jpeg" alt="Луна">
+                <div class="photo-grid__caption">
+                    <h2 class="photo-grid__title">Луна</h2>
+                    <button class="photo-grid__like-btn" type="button"></button>
+                </div>
+            </article>
+            <article class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-grid-sakura.jpeg" alt="Ветви сакуры">
+                <div class="photo-grid__caption">
+                    <h2 class="photo-grid__title">Ветви сакуры</h2>
+                    <button class="photo-grid__like-btn" type="button"></button>
+                </div>
+            </article>
+            <article class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-grid-tree.jpeg" alt="Большое дерево">
+                <div class="photo-grid__caption">
+                    <h2 class="photo-grid__title">Большое дерево</h2>
+                    <button class="photo-grid__like-btn" type="button"></button>
+                </div>
+            </article>
+            <article class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-grid-flowers.jpeg" alt="Цветы">
+                <div class="photo-grid__caption">
+                    <h2 class="photo-grid__title">Цветы</h2>
+                    <button class="photo-grid__like-btn" type="button"></button>
+                </div>
+            </article>
+            <article class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-grid-cloud.jpeg" alt="Загадочное облако">
+                <div class="photo-grid__caption">
+                    <h2 class="photo-grid__title">Загадочное облако</h2>
+                    <button class="photo-grid__like-btn" type="button"></button>
+                </div>
+            </article>
+            <article class="photo-grid__item">
+                <img class="photo-grid__image" src="./images/photo-grid-road.jpeg" alt="Осенняя дорога">
+                <div class="photo-grid__caption">
+                    <h2 class="photo-grid__title">Осенняя дорога</h2>
+                    <button class="photo-grid__like-btn" type="button"></button>
+                </div>
+            </article>
+        </div>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">© 2022 Mesto Russia</p>
+    </footer>
+        <!--   popup     -->
+        <div class="popup popup_opened">
+            <div class="popup__container">
+                <button class="popup__close-btn" type="button"></button>
+                <div class="popup__content">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form name="popup-name" class="popup__form" method="post">
+                    <input name="user-name" type="text" class="popup__input popup__input_name_user-name" placeholder="Имя Фамилия" required>
+                    <input name="user-description" type="text" class="popup__input popup__input_name_job" placeholder="О себе">
+                    <button class="popup__save-btn" type="submit">Сохранить</button>
+                </form>
+                </div>
+            </div>
+        </div>
+        <!--    popup    -->
+    </div>
+    <script src="scripts/index.js"></script>
+</body>
+</html>

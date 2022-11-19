@@ -1,0 +1,27 @@
+.profile__user-description {
+    grid-area: description;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    align-self: start;
+    margin: 16px auto 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 780px) {
+    .profile__user-description {
+        text-align: center;
+        margin-top: 14px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .profile__user-description {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
