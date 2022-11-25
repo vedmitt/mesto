@@ -15,7 +15,16 @@
 
 @media screen and (max-width: 450px) {
     .popup__container {
-        width: 300px;
-        left: 0;
+        width: 288px;
+        height: 358px;
+        top: calc(50% - 358px/2);
+        left: calc(50% - 288px/2);
+        grid-template-columns: repeat(1, auto);
+        grid-template-rows: repeat(2, auto);
+        grid-template-areas:
+        "close"
+        "content";
+        row-gap: 16px;
+        column-gap: 0;
     }
 }

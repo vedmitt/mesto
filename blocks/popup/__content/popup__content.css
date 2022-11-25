@@ -12,3 +12,11 @@
     padding: 34px 36px 37px;
     overflow: scroll;
 }
+
+@media screen and (max-width: 450px) {
+    .popup__content {
+        width: 282px;
+        height: 322px;
+        padding: 25px 22px;
+    }
+}
