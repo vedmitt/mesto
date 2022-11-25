@@ -9,6 +9,7 @@
     grid-auto-rows: auto;
     grid-gap: 0;
     justify-content: left;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 780px) {
@@ -16,9 +17,10 @@
         grid-template-columns: auto 34px;
         grid-template-rows: repeat(3, auto);
         grid-template-areas:
-        "avatar edit"
+        "avatar avatar"
         "name edit"
-        "description description";
+        "description gap";
         justify-content: center;
+        margin: 0 0 0 34px;
     }
 }

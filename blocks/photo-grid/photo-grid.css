@@ -7,12 +7,13 @@
     column-gap: 17px;
     row-gap: 20px;
     justify-items: center;
-    margin: 47px auto 0;
+    margin: 50px auto 0;
     padding: 0;
 }
 
 @media screen and (max-width: 450px)  {
     .photo-grid {
         width: 100%;
+        margin: 36px auto 0;
     }
 }

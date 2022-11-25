@@ -9,6 +9,9 @@
     align-self: end;
     margin: 0;
     padding: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 780px) {
@@ -24,5 +27,6 @@
     .profile__user-name {
         font-size: 27px;
         line-height: 33px;
+        margin: 25px 0 0;
     }
 }

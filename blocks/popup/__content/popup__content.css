@@ -10,7 +10,6 @@
     border-radius: 10px;
     margin: 0;
     padding: 34px 36px 37px;
-    overflow: scroll;
 }
 
 @media screen and (max-width: 450px) {
