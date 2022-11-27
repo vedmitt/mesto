@@ -18,7 +18,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
     .popup__save-btn {
         font-size: 14px;
         line-height: 17px;
