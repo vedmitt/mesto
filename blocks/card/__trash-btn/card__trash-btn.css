@@ -1,4 +1,4 @@
-.photo-grid__trash-btn {
+.card__trash-btn {
     width: 18px;
     height: 19px;
     position: absolute;
@@ -17,7 +17,7 @@
     right: 20px;
 }
 
-.photo-grid__trash-btn:hover {
+.card__trash-btn:hover {
     opacity: 0.6;
     cursor: pointer;
 }
