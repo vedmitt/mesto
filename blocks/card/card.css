@@ -3,6 +3,8 @@
     overflow-block: hidden;
     width: 282px;
     height: 361px;
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
     padding: 0;
     background: #FFFFFF;
