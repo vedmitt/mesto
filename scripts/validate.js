@@ -1,60 +1,57 @@
-let formParams = null;
-
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, formObj) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(formParams.formInputTypeError);
+    inputElement.classList.add(formObj.formInputTypeError);
     errorElement.textContent = errorMessage;
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, formObj) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(formParams.formInputTypeError);
+    inputElement.classList.remove(formObj.formInputTypeError);
     errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, formObj) => {
     if (!inputElement.validity.valid) {
-        showInputError(formElement, inputElement, inputElement.validationMessage);
+        showInputError(formElement, inputElement, inputElement.validationMessage, formObj);
     } else {
-        hideInputError(formElement, inputElement);
+        hideInputError(formElement, inputElement, formObj);
     }
 };
 
-const setEventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll(`.${formParams.formInput}`));
-    const buttonElement = formElement.querySelector(`.${formParams.formSubmitBtn}`);
-    toggleButtonState(inputList, buttonElement);
+const setEventListeners = (formElement, formObj) => {
+    const inputList = Array.from(formElement.querySelectorAll(`.${formObj.formInput}`));
+    const buttonElement = formElement.querySelector(`.${formObj.formSubmitBtn}`);
+    toggleButtonState(inputList, buttonElement, formObj);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
-            checkInputValidity(formElement, inputElement);
-            toggleButtonState(inputList, buttonElement);
+            checkInputValidity(formElement, inputElement, formObj);
+            toggleButtonState(inputList, buttonElement, formObj);
         });
     });
 };
 
 const enableValidation = (formObj) => {
-    formParams = formObj;
-    const formList = Array.from(document.querySelectorAll(`.${formParams.form}`));
+    const formList = Array.from(document.querySelectorAll(`.${formObj.form}`));
     formList.forEach((formElement) => {
-        setEventListeners(formElement);
+        setEventListeners(formElement, formObj);
     });
 };
 
-function inactiveSaveBtn(buttonElement) {
-    buttonElement.classList.add(formParams.formSubmitBtnInactive);
+function inactiveSaveBtn(buttonElement, formObj) {
+    buttonElement.classList.add(formObj.formSubmitBtnInactive);
     buttonElement.disabled = true;
 }
 
-function activeSaveBtn(buttonElement) {
-    buttonElement.classList.remove(formParams.formSubmitBtnInactive);
+function activeSaveBtn(buttonElement, formObj) {
+    buttonElement.classList.remove(formObj.formSubmitBtnInactive);
     buttonElement.disabled = false;
 }
 
-function toggleButtonState(inputList, buttonElement) {
+function toggleButtonState(inputList, buttonElement, formObj) {
     if (hasInvalidInput(inputList)) {
-        inactiveSaveBtn(buttonElement);
+        inactiveSaveBtn(buttonElement, formObj);
     } else {
-        activeSaveBtn(buttonElement);
+        activeSaveBtn(buttonElement, formObj);
     }
 }
 
@@ -64,17 +61,17 @@ function hasInvalidInput(inputList) {
     });
 }
 
-function hasInvalidInputInForm(formElement) {
-    const inputList = Array.from(formElement.querySelectorAll(`.${formParams.formInput}`));
+function hasInvalidInputInForm(formElement, formObj) {
+    const inputList = Array.from(formElement.querySelectorAll(`.${formObj.formInput}`));
     return hasInvalidInput(inputList);
 }
 
-function hideAllInputErrors(formElement){
-    const inputList = Array.from(formElement.querySelectorAll(`.${formParams.formInput}`));
+function hideAllInputErrors(formElement, formObj){
+    const inputList = Array.from(formElement.querySelectorAll(`.${formObj.formInput}`));
     inputList.forEach((inputElement) => {
-        if (inputElement.classList.contains(formParams.formInputTypeError)) {
+        if (inputElement.classList.contains(formObj.formInputTypeError)) {
             const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-            inputElement.classList.remove(formParams.formInputTypeError);
+            inputElement.classList.remove(formObj.formInputTypeError);
             errorElement.textContent = '';
         }
     });

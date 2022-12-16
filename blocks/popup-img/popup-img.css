@@ -1,9 +1,5 @@
 .popup-img {
     position: fixed;
-    width: calc(75vw + 80px);
-    height: calc(75vh + 80px);
-    top: calc(50% - (75vh + 80px)/2);
-    left: calc(50% - (75vw + 80px)/2);
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(3, auto);
@@ -16,19 +12,4 @@
     padding: 0;
     align-content: center;
     justify-content: center;
-}
-
-@media screen and (max-width: 500px) {
-    .popup-img {
-        width: calc(75vw + 72px);
-        height: calc(75vh + 72px);
-        top: calc(50% - (75vh + 72px)/2);
-        left: calc(50% - (75vw + 72px)/2);
-        grid-template-columns: repeat(1, auto);
-        grid-template-rows: repeat(3, auto);
-        grid-template-areas:
-        "close"
-        "fig"
-        "cap";
-    }
 }

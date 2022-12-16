@@ -14,6 +14,7 @@ const formEditProfile = document.forms['form-edit-profile'];
 const inputNameEditProfileForm = formEditProfile['user-name'];
 const inputJobEditProfileForm = formEditProfile['user-job'];
 const btnSubmitProfileForm = formEditProfile.querySelector('.form__save-btn');
+const inputsFormEditProfile = Array.from(formEditProfile.querySelectorAll('.form__input'));
 
 const popupAddCard = bodyContainer.querySelector('#popup-add-card');
 const formAddCard = document.forms['form-add-card'];
@@ -30,14 +31,16 @@ const imagePopupViewImage = popupViewImage.querySelector('.popup-img__image');
 const cardTemplate = document.querySelector('#card-template').content;
 const cardItem = cardTemplate.querySelector('.card');
 
-/** включить валидацию форм */
-enableValidation({
+const formObj = {
     form: 'form',
     formInput: 'form__input',
     formSubmitBtn: 'form__save-btn',
     formSubmitBtnInactive: 'form__save-btn_inactive',
     formInputTypeError: 'form__input_type_error'
-});
+};
+
+/** включить валидацию форм */
+enableValidation(formObj);
 
 /** первоначальная загрузка карточек */
 initialCards.forEach((item) => {
@@ -65,16 +68,15 @@ function closePopupByEsc(evt) {
 }
 
 function showPopupEditProfile() {
-    hideAllInputErrors(formEditProfile);
+    hideAllInputErrors(formEditProfile, formObj);
     setEditInfoForm();
-    const inputs = Array.from(formEditProfile.querySelectorAll('.form__input'));
-    toggleButtonState(inputs, btnSubmitProfileForm);
+    toggleButtonState(inputsFormEditProfile, btnSubmitProfileForm, formObj);
     openPopup(popupEditProfile);
 }
 
 function showPopupAddCard() {
-    hideAllInputErrors(formAddCard);
-    inactiveSaveBtn(btnSubmitAddCard);
+    hideAllInputErrors(formAddCard, formObj);
+    inactiveSaveBtn(btnSubmitAddCard, formObj);
     formAddCard.reset();
     openPopup(popupAddCard);
 }
@@ -100,7 +102,7 @@ function setEditInfoForm() {
 /** функция отправки формы */
 function handleSubmitProfileForm(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    if (!hasInvalidInputInForm(formEditProfile)) {
+    if (!hasInvalidInputInForm(formEditProfile, formObj)) {
         setProfileInfo();
         closePopup(popupEditProfile);
     }
@@ -108,7 +110,7 @@ function handleSubmitProfileForm(evt) {
 
 function handleSubmitCardForm(evt) {
     evt.preventDefault();
-    if (!hasInvalidInputInForm(formAddCard)) {
+    if (!hasInvalidInputInForm(formAddCard, formObj)) {
         renderCard({
             title: inputTitleAddCardForm.value,
             url: inputUrlAddCardForm.value
@@ -165,21 +167,12 @@ function renderCard(cardData, isPrepend=false) {
 function setClosePopupListeners() {
     const popups = bodyContainer.querySelectorAll('.popup');
     popups.forEach((popup) => {
-        // закрытие на крестик
-        const btnClosePopup = popup.querySelector('.popup__close-btn');
-        btnClosePopup.addEventListener('click', function (evt) {
-            closePopup(popup);
-        });
-        // закрытие на оверлей
         popup.addEventListener('click', function (evt) {
-            const targetClassList = evt.target.classList;
-            if (targetClassList.contains('popup') ||
-                targetClassList.contains('popup__container') ||
-                targetClassList.contains('popup-img')) {
-                closePopup(popup);
-            }
-        });
+        if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close-btn')) {
+            closePopup(popup);
+        }
     });
+});
 }
 
 /** Слушатели кнопок */
