@@ -1,10 +1,9 @@
-import {showPopupViewImage} from "./index.js";
-
 export default class Card {
-    constructor(cardData, template) {
+    constructor(cardData, template, handleCardClick) {
         this._title = cardData.title;
         this._url = cardData.url;
         this._template = template;
+        this._handleCardClick = handleCardClick;
     }
 
     _getElement() {
@@ -32,7 +31,7 @@ export default class Card {
         // подключение просмотра изображения
         this._element.querySelector('.card__image')
             .addEventListener('click', () => {
-            this._handleShowCard();
+            this._handleCardClick(this._title, this._url);
         });
     }
 
@@ -42,10 +41,6 @@ export default class Card {
 
     _handleLikeCard(){
         this._likeCardBtn.classList.toggle('card__like-btn_active');
-    }
-
-    _handleShowCard(){
-        showPopupViewImage(this._title, this._url);
     }
 
     renderCard() {

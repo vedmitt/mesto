@@ -69,24 +69,15 @@ function closePopupByEsc(evt) {
 }
 
 function showPopupEditProfile() {
-    formEditProfileValidator.hideAllInputErrors();
+    formEditProfileValidator.resetValidation();
     setEditInfoForm();
-    formEditProfileValidator.toggleButtonState();
     openPopup(popupEditProfile);
 }
 
 function showPopupAddCard() {
-    formAddCardValidator.hideAllInputErrors();
-    formAddCardValidator.inactiveSaveBtn();
+    formAddCardValidator.resetValidation();
     formAddCard.reset();
     openPopup(popupAddCard);
-}
-
-export function showPopupViewImage(cardCaption='', cardURL='') {
-    imagePopupViewImage.src = cardURL;
-    imagePopupViewImage.alt = cardCaption;
-    captionPopupViewImage.textContent = cardCaption;
-    openPopup(popupViewImage);
 }
 
 /** присваевает данным о пользователе новые значения и наоборот */
@@ -100,30 +91,39 @@ function setEditInfoForm() {
     inputJobEditProfileForm.value = profileJob.textContent;
 }
 
+/** функция обработчик клика на изображение карточки **/
+function handleCardClick(cardCaption, cardURL) {
+    imagePopupViewImage.src = cardURL;
+    imagePopupViewImage.alt = cardCaption;
+    captionPopupViewImage.textContent = cardCaption;
+    openPopup(popupViewImage);
+}
+
 /** функция отправки формы */
 function handleSubmitProfileForm(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-    if (!formEditProfileValidator.hasInvalidInputInForm()) {
-        setProfileInfo();
-        closePopup(popupEditProfile);
-    }
+    setProfileInfo();
+    closePopup(popupEditProfile);
 }
 
 function handleSubmitCardForm(evt) {
     evt.preventDefault();
-    if (!formAddCardValidator.hasInvalidInputInForm()) {
-        renderCard({
-            title: inputTitleAddCardForm.value,
-            url: inputUrlAddCardForm.value
-        },true);
-        closePopup(popupAddCard);
-        formAddCard.reset();
-    }
+    renderCard({
+        title: inputTitleAddCardForm.value,
+        url: inputUrlAddCardForm.value
+    },true);
+    closePopup(popupAddCard);
+    formAddCard.reset();
+}
+
+/** создать готовую карточку **/
+function createCard(cardData) {
+    return new Card(cardData, '#card-template', handleCardClick).renderCard();
 }
 
 /** добавить карточку на страницу */
 function renderCard(cardData, isPrepend=false) {
-    const card = new Card(cardData, '#card-template').renderCard();
+    const card = createCard(cardData);
 
     // добавление карточки в начало или конец контейнера
     if (!isPrepend) {
