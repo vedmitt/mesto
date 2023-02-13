@@ -14,7 +14,7 @@
     <main>
         <section class="profile">
                 <div class="profile__info">
-                <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар пользователя">
+                <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар пользователя">
                     <h1 class="profile__user-name">Жак-Ив Кусто</h1>
                     <button class="profile__edit-btn" type="button"></button>
                     <p class="profile__user-description">Исследователь океана</p>
@@ -35,9 +35,9 @@
                         <h2 class="popup__title">Редактировать профиль</h2>
                         <!--оставим метод get тк форма пока никуда не отправляется-->
                         <form name="form-edit-profile" class="form" method="get" novalidate>
-                            <input id="user-name-input" name="user-name" type="text" class="form__input form__input_name_user-name" placeholder="Имя Фамилия" minlength="2" maxlength="40" required>
+                            <input id="user-name-input" name="name" type="text" class="form__input form__input_name_user-name" placeholder="Имя Фамилия" minlength="2" maxlength="40" required>
                             <span class="form__input-error user-name-input-error"></span>
-                            <input id="user-job-input" name="user-job" type="text" class="form__input form__input_name_job" placeholder="О себе" minlength="2" maxlength="200" required>
+                            <input id="user-job-input" name="job" type="text" class="form__input form__input_name_job" placeholder="О себе" minlength="2" maxlength="200" required>
                             <span class="form__input-error user-job-input-error"></span>
                             <button class="form__save-btn" type="submit">Сохранить</button>
                         </form>
@@ -52,9 +52,9 @@
                     <h2 class="popup__title">Новое место</h2>
                     <!--оставим метод get тк форма пока никуда не отправляется-->
                     <form name="form-add-card" class="form" method="get" novalidate>
-                        <input id="card-title-input" name="card-title" type="text" class="form__input form__input_name_title" placeholder="Название" minlength="2" maxlength="30" required>
+                        <input id="card-title-input" name="title" type="text" class="form__input form__input_name_title" placeholder="Название" minlength="2" maxlength="30" required>
                         <span class="form__input-error card-title-input-error"></span>
-                        <input id="card-link-input" name="card-link" type="url" class="form__input form__input_name_url" placeholder="Ссылка на картинку" required>
+                        <input id="card-link-input" name="link" type="url" class="form__input form__input_name_url" placeholder="Ссылка на картинку" required>
                         <span class="form__input-error card-link-input-error"></span>
                         <button class="form__save-btn" type="submit">Создать</button>
                     </form>
@@ -81,9 +81,6 @@
         </article>
     </template>
 <!--    template    -->
-    <script type="module" src="scripts/index.js"></script>
-    <script type="module" src="./scripts/cards.js"></script>
-    <script type="module" src="./scripts/Card.js"></script>
-    <script type="module" src="./scripts/FormValidator.js"></script>
+    <script type="module" src="./pages/index.js"></script>
 </body>
 </html>

@@ -35,7 +35,8 @@ _testmain.go
 .DS_Store
 
 ##other
-#node_modules/
+node_modules/
+dist/
 #bower_components/
 .tmp
 #.sass-cache

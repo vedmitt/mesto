@@ -1,7 +1,7 @@
 export default class Card {
-    constructor(cardData, template, handleCardClick) {
-        this._title = cardData.title;
-        this._url = cardData.url;
+    constructor({ title, link }, template, handleCardClick) {
+        this._title = title;
+        this._url = link;
         this._template = template;
         this._handleCardClick = handleCardClick;
     }
@@ -43,7 +43,7 @@ export default class Card {
         this._likeCardBtn.classList.toggle('card__like-btn_active');
     }
 
-    renderCard() {
+    generate() {
         this._getElement();
         this._setEventListeners();
 
