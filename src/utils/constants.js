@@ -27,7 +27,7 @@ export const initialCards = [
 
 export const cardListSection = '#photo-grid-container';
 
-export const formObj = {
+export const validationConfig = {
     formInput: 'form__input',
     formSubmitBtn: 'form__save-btn',
     formSubmitBtnInactive: 'form__save-btn_inactive',

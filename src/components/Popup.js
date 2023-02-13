@@ -2,13 +2,15 @@ export default class Popup {
     constructor(selector) {
         this._popup = document.querySelector(selector);
         this._bodyContainer = document.querySelector('body');
+        this._handleEscClose = this._handleEscClose.bind(this);
+        
         this.setEventListeners();
     }
 
     open() {
         this._popup.classList.add('popup_opened');
         // добавим слушатель закрытия попапа нажатием Esc
-        this._bodyContainer.addEventListener('keydown', this._handleEscClose.bind(this));
+        this._bodyContainer.addEventListener('keydown', this._handleEscClose);
     }
     
     close() {
