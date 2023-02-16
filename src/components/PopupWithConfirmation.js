@@ -4,6 +4,7 @@ export default class PopupWithConfirmation extends Popup {
     constructor({selector, handleOkClick}) {
         super(selector);
         this._handleOkClick = handleOkClick;
+        
         this.setEventListeners();
     }
 
@@ -15,7 +16,8 @@ export default class PopupWithConfirmation extends Popup {
     setEventListeners() {
         super.setEventListeners();
         
-        this._popup.querySelector('.form__save-btn').addEventListener('click', () => {
+        this._popup.addEventListener('click', (evt) => {
+            evt.preventDefault();
             this._handleOkClick(this.card);
             this.close();
         });
