@@ -1,29 +1,8 @@
-export const initialCards = [
-    {
-        title: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        title: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        title: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        title: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        title: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        title: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
+/** Это чувствительные данные, которые лучше перенести в переменные среды */
+export const serverUrl = 'https://mesto.nomoreparties.co'
+export const groupId = 'cohort-59';
+export const personalToken = '64f46641-1d17-4ea8-b206-5bf810349ffe';
+
 
 export const cardListSection = '#photo-grid-container';
 
@@ -35,8 +14,11 @@ export const validationConfig = {
 };
 
 export const popupEditProfileSelector = '#popup-edit-profile';
+export const popupEditAvatarSelector = '#popup-edit-avatar';
 export const popupAddCardSelector = '#popup-add-card';
+export const popupDelCardSelector = '#popup-del-card';
 export const popupWithImageSelector = '#popup-view-image';
 
+export const formEditAvatarSelector = 'form-edit-avatar';
 export const formEditProfileSelector = 'form-edit-profile';
 export const formAddCardSelector = 'form-add-card';

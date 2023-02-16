@@ -3,7 +3,7 @@ export default class Popup {
         this._popup = document.querySelector(selector);
         this._bodyContainer = document.querySelector('body');
         this._handleEscClose = this._handleEscClose.bind(this);
-        
+
         this.setEventListeners();
     }
 
