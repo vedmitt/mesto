@@ -11,4 +11,4 @@
 
 **GitHub Pages**
 
-* [Ссылка на GitHub Pages](https://vedmitt.github.io/mesto-proj/index.html)
+* [Ссылка на GitHub Pages](https://vedmitt.github.io/mesto/index.html)

@@ -1,3 +1,14 @@
+import {
+    cardSelector,
+    cardLikeCounterSelector,
+    cardLikeBtnSelector,
+    cardLikeBtnActiveSelector,
+    cardImageSelector,
+    cardTrashBtnSelector,
+    cardTrashBtnHiddenSelector,
+    cardTitleSelector
+} from '../utils/constants.js';
+
 export default class Card {
     constructor({ _id, name, link, likes, owner }, myUserId, template, handleCardClick, handleRemoveCard, handlePutLike, handleDelLike) {
         this._id = _id;
@@ -14,67 +25,68 @@ export default class Card {
         this._handleDecreaseLikes = handleDelLike;
     }
 
+    getId() {
+        return this._id;
+    }
+
     _getElement() {
         this._element = document
             .querySelector(this._template)
             .content
-            .querySelector('.card')
+            .querySelector(cardSelector)
             .cloneNode(true);
+    }
+
+    _checkMyLike(arr, val) {
+        return arr.some(function({_id}) {
+          return val === _id;
+        });
+      }
+
+    _setMyLike() {
+        // обозначим мои лайки
+        if (this._checkMyLike(this._likes, this._myUserId)) {
+            this._likeCardBtn.classList.toggle(cardLikeBtnActiveSelector);
+        }
     }
 
     _setEventListeners() {
         // подключение кнопки лайка
-        this._likeCounter = this._element.querySelector('.card__like-counter');
-        this._likeCardBtn = this._element.querySelector('.card__like-btn');
-
-        // обозначим мои лайки
-        const ids = [];
-        this._likes.forEach((item) => {
-            ids.push(item._id);
-        })
-
-        if (ids.includes(this._myUserId)) {
-            this._likeCardBtn.classList.toggle('card__like-btn_active');
-        }
-
+        this._likeCardBtn = this._element.querySelector(cardLikeBtnSelector);
         this._likeCardBtn.addEventListener('click', () => {
             this._handleLikeCard();
         });
 
         // подключение просмотра изображения
-        this._element.querySelector('.card__image')
+        this._element.querySelector(cardImageSelector)
             .addEventListener('click', () => {
             this._handleCardClick(this._name, this._link);
         });
 
         // подключение кнопки удаления карточки
-        this._trashBtn = this._element.querySelector('.card__trash-btn');
+        this._trashBtn = this._element.querySelector(cardTrashBtnSelector);
 
         if (this._myUserId === this._ownerId) {
             this._trashBtn.addEventListener('click', () => {
                 this._handleRemoveCard(this);  // открывает попап с подтверждением удаления
                 });
         } else {
-            this._trashBtn.classList.add('card__trash-btn_hidden');
+            this._trashBtn.classList.add(cardTrashBtnHiddenSelector);
         }
     }
 
     remove() {
         this._element.remove();
+        this._element = null;
     }
 
-    increaseLikeCount() {
-        this._likeCounter.textContent++;
-    }
-
-    decreaseLikeCount() {
-        this._likeCounter.textContent--;
+    updateLikes(likes) {
+        this._cardElementLikes.textContent = likes.length || 0;
+        this._likeCardBtn.classList.toggle(cardLikeBtnActiveSelector);
     }
 
     _handleLikeCard(){
-        this._likeCardBtn.classList.toggle('card__like-btn_active');
-
-        if (this._likeCardBtn.classList.contains('card__like-btn_active')) {
+        if (!this._likeCardBtn.classList.contains(cardLikeBtnActiveSelector)) {
             this._handleIncreaseLikes(this);
         } else {
             this._handleDecreaseLikes(this);
@@ -85,14 +97,15 @@ export default class Card {
         this._getElement();
         this._setEventListeners();
 
-        this._cardElementTitle = this._element.querySelector('.card__title');
-        this._cardElementImage = this._element.querySelector('.card__image');
-        this._cardElementLikes = this._element.querySelector('.card__like-counter');
+        this._cardElementTitle = this._element.querySelector(cardTitleSelector);
+        this._cardElementImage = this._element.querySelector(cardImageSelector);
+        this._cardElementLikes = this._element.querySelector(cardLikeCounterSelector);
 
         this._cardElementTitle.textContent = this._name;
         this._cardElementImage.src = this._link;
         this._cardElementImage.alt = this._name;
         this._cardElementLikes.textContent = this._likes.length || 0;
+        this._setMyLike();
 
         return this._element
     }

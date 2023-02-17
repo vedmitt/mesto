@@ -1,18 +1,18 @@
 export default class FormValidator {
-    constructor(formObj, formElement) {
-        this._formInputSelector = formObj.formInput;
-        this._formSubmitBtnSelector = formObj.formSubmitBtn;
-        this._formSubmitBtnInactiveSelector = formObj.formSubmitBtnInactive;
-        this._formInputTypeErrorSelector = formObj.formInputTypeError;
+    constructor(config, formElement) {
+        this._formInputSelector = config.formInput;
+        this._formSubmitBtnSelector = config.formSubmitBtn;
+        this._formSubmitBtnInactiveSelector = config.formSubmitBtnInactive;
+        this._formInputTypeErrorSelector = config.formInputTypeError;
         this._formElement = formElement;
     }
 
-    _inactiveSaveBtn() {
+    _disableSaveBtn() {
         this._buttonElement.classList.add(this._formSubmitBtnInactiveSelector);
         this._buttonElement.disabled = true;
     }
 
-    _activeSaveBtn() {
+    _enableSaveBtn() {
         this._buttonElement.classList.remove(this._formSubmitBtnInactiveSelector);
         this._buttonElement.disabled = false;
     }
@@ -25,9 +25,9 @@ export default class FormValidator {
 
     _toggleButtonState() {
         if (this._hasInvalidInput()) {
-            this._inactiveSaveBtn();
+            this._disableSaveBtn();
         } else {
-            this._activeSaveBtn();
+            this._enableSaveBtn();
         }
     }
 

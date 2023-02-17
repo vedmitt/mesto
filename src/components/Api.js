@@ -1,117 +1,94 @@
 export default class Api {
-    constructor({serverUrl, groupId, personalToken}) {  
-        this._baseUrl = `${serverUrl}/v1/${groupId}`;
-        this._option = {
-            headers: {
-                authorization: personalToken,
-                'Content-Type': 'application/json'
-                },
-            body: null,
-            method: 'GET'
-        };
+    constructor({baseUrl, headers}) {  
+        this._baseUrl = baseUrl;
+        this._headers = headers;
     }
 
-    getUserInfo() {
-        this._option.method = 'GET';
-        this._option.body = null;
+    _getResponseData(res) {
+        if (!res.ok) {
+            return Promise.reject(`Ошибка: ${res.status}`); 
+        }
+        return res.json();
+    } 
 
-        return fetch(`${this._baseUrl}/users/me`, this._option)
+    getUserInfo() {
+        return fetch(`${this._baseUrl}/users/me`, { 
+            headers: this._headers 
+        })
             .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
+                return this._getResponseData(res);
             })
     }
 
     updateUserInfo(userInfo) {
-        this._option.method = 'PATCH';
-        this._option.body = JSON.stringify(userInfo);
-
-        return fetch(`${this._baseUrl}/users/me`, this._option)
+        return fetch(`${this._baseUrl}/users/me`, { 
+            headers: this._headers,
+            method: 'PATCH',
+            body: JSON.stringify(userInfo)
+         })
             .then(res => {
-                if (res.ok) {
-                return res.json();
-                }
-                return Promise.reject(res.status);
+                return this._getResponseData(res);
             })
     }
 
     updateAvatar(url) {
-        this._option.method = 'PATCH';
-        this._option.body = JSON.stringify(url);
-
-        return fetch(`${this._baseUrl}/users/me/avatar`, this._option)
+        return fetch(`${this._baseUrl}/users/me/avatar`, { 
+            headers: this._headers,
+            method: 'PATCH',
+            body: JSON.stringify(url)
+         })
             .then(res => {
-                if (res.ok) {
-                return res.json();
-                }
-                return Promise.reject(res.status);
+                return this._getResponseData(res);
             })
     }
   
     getInitialCards() {
-        this._option.method = 'GET';
-        this._option.body = null;
-
-        return fetch(`${this._baseUrl}/cards`, this._option)
+        return fetch(`${this._baseUrl}/cards`, { 
+            headers: this._headers 
+        })
             .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
+                return this._getResponseData(res);
             })
     }
 
     addCard(card) {
-        this._option.method = 'POST';
-        this._option.body = JSON.stringify(card);
-
-        return fetch(`${this._baseUrl}/cards`, this._option)
+        return fetch(`${this._baseUrl}/cards`, { 
+            headers: this._headers,
+            method: 'POST',
+            body: JSON.stringify(card)
+         })
             .then(res => {
-                if (res.ok) {
-                return res.json();
-                }
-                return Promise.reject(res.status);
+                return this._getResponseData(res);
             })
     }
 
     removeCard(cardId) {
-        this._option.method = 'DELETE';
-        this._option.body = null;
-
-        return fetch(`${this._baseUrl}/cards/${cardId}`, this._option)
+        return fetch(`${this._baseUrl}/cards/${cardId}`, { 
+            headers: this._headers,
+            method: 'DELETE'
+         })
             .then(res => {
-                if (res.ok) {
-                return res.json();
-                }
-                return Promise.reject(res.status);
+                return this._getResponseData(res);
             })
     }
 
     addLike(cardId) {
-        this._option.method = 'PUT';
-        this._option.body = null;
-
-        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, this._option)
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, { 
+            headers: this._headers,
+            method: 'PUT'
+         })
             .then(res => {
-                if (res.ok) {
-                return res.json();
-                }
-                return Promise.reject(res.status);
+                return this._getResponseData(res);
             })
     }
 
-    delLike(cardId) {
-        this._option.method = 'DELETE';
-        this._option.body = null;
-
-        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, this._option)
+    removeLike(cardId) {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, { 
+            headers: this._headers,
+            method: 'DELETE'
+         })
             .then(res => {
-                if (res.ok) {
-                return res.json();
-                }
-                return Promise.reject(res.status);
+                return this._getResponseData(res);
             })
     }
   }
