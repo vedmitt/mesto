@@ -37,15 +37,15 @@ export default class Card {
             .cloneNode(true);
     }
 
-    _checkMyLike(arr, val) {
+    isLiked(arr, val) {
         return arr.some(function({_id}) {
           return val === _id;
         });
       }
 
-    _setMyLike() {
+    _setInitialLikeState() {
         // обозначим мои лайки
-        if (this._checkMyLike(this._likes, this._myUserId)) {
+        if (this.isLiked(this._likes, this._myUserId)) {
             this._likeCardBtn.classList.toggle(cardLikeBtnActiveSelector);
         }
     }
@@ -105,7 +105,7 @@ export default class Card {
         this._cardElementImage.src = this._link;
         this._cardElementImage.alt = this._name;
         this._cardElementLikes.textContent = this._likes.length || 0;
-        this._setMyLike();
+        this._setInitialLikeState();
 
         return this._element
     }

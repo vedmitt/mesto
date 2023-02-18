@@ -48,3 +48,7 @@ export const cardImageSelector = '.card__image';
 export const cardTrashBtnSelector = '.card__trash-btn';
 export const cardTrashBtnHiddenSelector = 'card__trash-btn_hidden';
 export const cardTitleSelector = '.card__title';
+
+export const profileAvatar = document.querySelector(profileAvatarOverlaySelector);
+export const profileEditBtn = document.querySelector(profileEditBtnSelector);
+export const profileAddBtn = document.querySelector(profileAddBtnSelector);

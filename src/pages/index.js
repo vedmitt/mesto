@@ -25,10 +25,10 @@ import {
     profileUserNameSelector,
     profileUserDescSelector,
     profileAvatarSelector,
-    profileAvatarOverlaySelector,
-    profileEditBtnSelector,
-    profileAddBtnSelector,
     cardTemplateSelector,
+    profileAvatar,
+    profileEditBtn,
+    profileAddBtn
         } from '../utils/constants.js';
 
 /** API */
@@ -143,12 +143,12 @@ function getInitialData() {
         api.getUserInfo(),
         api.getInitialCards()
     ])
-    .then((values)=>{
+    .then(([userData, cards]) => {
         // рендер информации о пользователе
-        userInfo.setUserInfo(values[0]);
-        userInfo.setAvatar(values[0].avatar);
+        userInfo.setUserInfo(userData);
+        userInfo.setAvatar(userData.avatar);
         // рендер карточек
-        cardsSection.renderItems(values[1]);
+        cardsSection.renderItems(cards);
     })
     .catch((err)=>{
         return `Ошибка загрузки информации: ${err}`;
@@ -236,10 +236,6 @@ function handleProfileAddBtnClick() {
 
 
 /** слушатели открытия попапов */
-const profileAvatar = document.querySelector(profileAvatarOverlaySelector);
-const profileEditBtn = document.querySelector(profileEditBtnSelector);
-const profileAddBtn = document.querySelector(profileAddBtnSelector);
-
 profileAvatar.addEventListener('click', handleProfileAvatarClick);
 profileEditBtn.addEventListener('click', handleProfileEditBtnClick);
 profileAddBtn.addEventListener('click', handleProfileAddBtnClick);
